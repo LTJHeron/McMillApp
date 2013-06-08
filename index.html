@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>ss</title>
+<title>Macmillapp</title>
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -16,13 +16,14 @@
 
   <script type="text/x-handlebars" data-template-name="day">
     
-      <div class="card">
-        <h2>Appointments</h2>
-      </div>
+      
       <div class="card">
         <h2>Diary</h2>
         <div data-model-name="moodRating" {{ bindAttr data-score="model.moodRating" }} class="star-rating-editable"></div>
         {{#view Ember.TextArea valueBinding="model.moodDescription"}}{{/view}}
+      </div>
+      <div class="card">
+        <h2>Appointments</h2>
       </div>
       <a {{ action save }}>save</a>
   </script>
