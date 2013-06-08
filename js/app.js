@@ -56,19 +56,23 @@ App.DayModel = Ember.Object.extend({
     fatigue: "",
     activities: [],
     concerns: "",
-    appointments: [],
-    treatments: []
+    appointments: []
 });
 
 function getDayModel(year, month, day){
     console.log("getDayModel", year, month, day)
     var json = localStorage.getItem(new Date(year, month, day).toISOString().split("T")[0]);
     var data = json !== null ? JSON.parse(json) : {date: new Date(year, month, day)};
+
+    data.appointments = data.appointments || [];
+    for (var i=0;i<data.appointments.length;i++){
+        data.appointments[i].id=i;
+    }
     return App.DayModel.create(data);
 }
 
 function gotoDay(date){
-    window.location.hash = "/day/" + date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate();
+    window.location.hash = "/day/" + date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate();document.location.reload()
 }
 
 function updateHeader(date){
@@ -78,7 +82,7 @@ function updateHeader(date){
     $("#header").find("h1").text(new Date(date).toString());
     $("#header .prev").click(function(){
         var newDate = new Date(date);
-        newDate.setDate(newDate.getDate() + 1)
+        newDate.setDate(newDate.getDate() - 1)
         gotoDay(newDate)
     })
     $("#header .next").click(function(){
