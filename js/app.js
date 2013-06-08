@@ -68,7 +68,7 @@ function getDayModel(year, month, day){
 }
 
 function gotoDay(date){
-    window.location.hash = "/day/" + date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate();
+    window.location.hash = "/day/" + date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate();document.location.reload()
 }
 
 function updateHeader(date){
@@ -78,7 +78,7 @@ function updateHeader(date){
     $("#header").find("h1").text(new Date(date).toString());
     $("#header .prev").click(function(){
         var newDate = new Date(date);
-        newDate.setDate(newDate.getDate() + 1)
+        newDate.setDate(newDate.getDate() - 1)
         gotoDay(newDate)
     })
     $("#header .next").click(function(){
