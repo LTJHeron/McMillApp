@@ -9,7 +9,7 @@
 <body>
 
   <script type="text/x-handlebars">
-    <div id="header">
+    <div role="navigation" id="header">
       
     </div>
 
@@ -17,20 +17,20 @@
   </script>
 
   <script type="text/template" id="header-template">
-    <div class="prev">prev</div>
+    <div role="button" class="prev">prev</div>
     <h1></h1>
-    <div class="next">next</div>
+    <div role="button" class="next">next</div>
   </script>
 
   <script type="text/x-handlebars" data-template-name="day">
     
       
-      <div class="card">
+      <div role="main"  class="card">
         <h2>Diary</h2>
         <div data-model-name="moodRating" {{ bindAttr data-score="model.moodRating" }} class="star-rating-editable"></div>
         {{#view Ember.TextArea valueBinding="model.moodDescription"}}{{/view}}
       </div>
-      <div class="card">
+      <div role="form" class="card">
         <h2>Appointments</h2>
         {{#each appointment in model.appointments}}
           Name: {{appointment.name}}<br>
@@ -39,7 +39,7 @@
           Notes: {{appointment.notes}}
         {{/each}}
       </div>
-      <a {{ action save }}>save</a>
+      <a role="button" {{ action save }}>save</a>
   </script>
 
   <script src="js/libs/jquery-1.9.1.js"></script>
