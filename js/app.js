@@ -29,6 +29,18 @@ App.AppointmentsRoute = Ember.Route.extend({
     }
 });
 
+App.AppointmentsController = Ember.Controller.extend({
+    addAppointment: function(){
+        var obj = JSON.parse(JSON.stringify(this.get("model")));
+        obj.appointments.push({
+            details: "sddddd"
+        });
+        saveModel(App.DayModel.create(obj));
+        window.location.reload();
+
+    }
+});
+
 App.AppointmentsView = Ember.View.extend({
     didInsertElement: function(){
         var view = this;
@@ -39,10 +51,14 @@ App.AppointmentsView = Ember.View.extend({
 App.DayController = Ember.Controller.extend({
     save: function(){
         var model = this.get("model");
-        var json = JSON.stringify(model);
-        localStorage.setItem(model.get("date").toISOString().split("T")[0], json)
+        saveModel(model);
     }
 });
+
+function saveModel(model){
+    var json = JSON.stringify(model);
+    localStorage.setItem(new Date(model.get("date")).toISOString().split("T")[0], json)
+}
 
 App.DayView = Ember.View.extend({
     didInsertElement: function(){

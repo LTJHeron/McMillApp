@@ -44,7 +44,20 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="appointments">
-    
+         
+        {{#each appointment in model.appointments}}
+          <div class="card">
+            Name: {{appointment.name}}<br>
+            Date: {{appointment.date}}<br>
+            Details: {{appointment.details}}
+            Notes: {{appointment.notes}}
+            <hr>
+          </div>
+        {{/each}}
+
+        <div class="card">
+          <a {{action addAppointment}}>Add appointment</a>
+        </div>
     
   </script>
 
