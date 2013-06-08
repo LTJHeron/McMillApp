@@ -35,11 +35,17 @@
         {{#each appointment in model.appointments}}
           Name: {{appointment.name}}<br>
           Date: {{appointment.date}}<br>
-          Details: {{appointment.details}}<hr>
+          Details: {{appointment.details}}
           Notes: {{appointment.notes}}
+          <hr>
         {{/each}}
       </div>
       <a {{ action save }}>save</a>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="appointments">
+    
+    
   </script>
 
   <script src="js/libs/jquery-1.9.1.js"></script>

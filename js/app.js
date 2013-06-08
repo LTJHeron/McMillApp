@@ -5,6 +5,7 @@ App = Ember.Application.create();
 App.Router.map(function() {
     this.route("index", { path: "/" });
     this.route("day", { path: "/day/:year/:month/:day" });
+    this.route("appointments", {path: "/appointments/:year/:month/:day"});
 });
 
 App.IndexRoute = Ember.Route.extend({
@@ -20,6 +21,19 @@ App.DayRoute = Ember.Route.extend({
     console.log(params)
     return getDayModel(params.year, params.month, params.day)
   }
+});
+
+App.AppointmentsRoute = Ember.Route.extend({
+    model: function(params){
+        return getDayModel(params.year, params.month, params.day)
+    }
+});
+
+App.AppointmentsView = Ember.View.extend({
+    didInsertElement: function(){
+        var view = this;
+        updateHeader(view.get("controller.model.date"))
+    }
 });
 
 App.DayController = Ember.Controller.extend({
@@ -72,7 +86,10 @@ function getDayModel(year, month, day){
 }
 
 function gotoDay(date){
-    window.location.hash = "/day/" + date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate();document.location.reload()
+    page = location.hash.split("/")[1];
+    window.location.hash = "/" + page + "/" + date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate();
+    document.location.reload()
+
 }
 
 function updateHeader(date){
