@@ -31,20 +31,24 @@ App.AppointmentsRoute = Ember.Route.extend({
 
 App.AppointmentsController = Ember.Controller.extend({
     addAppointment: function(){
-        var obj = JSON.parse(JSON.stringify(this.get("model")));
-        obj.appointments.push({
-            details: "sddddd"
-        });
-        saveModel(App.DayModel.create(obj));
+        addAppointment(this, {date: new Date()})
+        
         window.location.reload();
-
     }
 });
+
+function addAppointment(controller, data){
+        var obj = JSON.parse(JSON.stringify(controller.get("model")));
+        obj.appointments.push(data)
+        saveModel(App.DayModel.create(obj));
+
+}
 
 App.AppointmentsView = Ember.View.extend({
     didInsertElement: function(){
         var view = this;
         updateHeader(view.get("controller.model.date"))
+       
     }
 });
 
@@ -80,13 +84,18 @@ App.DayModel = Ember.Object.extend({
     date: null,
     moodRating: 0,
     moodDescription: "",
-    medication: [],
     food: "",
     health: "",
     fatigue: "",
-    activities: [],
     concerns: "",
     appointments: []
+});
+
+App.AppointmentModel =  Ember.Object.extend({
+    date: null,
+    name: "",
+    details: "",
+    notes: ""
 });
 
 function getDayModel(year, month, day){
@@ -126,3 +135,8 @@ function updateHeader(date){
 }
 
 
+Ember.Handlebars.registerBoundHelper('myHelper', 
+    function(value, options) {
+        return value.toUpperCase();
+    }
+);
