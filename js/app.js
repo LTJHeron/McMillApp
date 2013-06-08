@@ -10,7 +10,8 @@ App.Router.map(function() {
 App.IndexRoute = Ember.Route.extend({
   redirect: function() {
     var today = new Date();
-    window.location.hash  = "/day/" + today.getFullYear() + "/" + today.getMonth() + "/" + today.getDate();
+    //App.Router.router.transitionTo("day", [2011])
+    gotoDay(today);
   }
 });
 
@@ -32,7 +33,7 @@ App.DayController = Ember.Controller.extend({
 App.DayView = Ember.View.extend({
     didInsertElement: function(){
         var view = this;
-        setHeaderDate(view.get("controller.model.date"))
+        updateHeader(view.get("controller.model.date"))
         $(".star-rating-editable").each(function(){
             $(this).raty({
                 score: $(this).data("score"),
@@ -41,6 +42,7 @@ App.DayView = Ember.View.extend({
                 }
             });
         });
+        $(".star-rating-editable").width(200)
     }
 });
 
@@ -59,11 +61,31 @@ App.DayModel = Ember.Object.extend({
 });
 
 function getDayModel(year, month, day){
+    console.log("getDayModel", year, month, day)
     var json = localStorage.getItem(new Date(year, month, day).toISOString().split("T")[0]);
     var data = json !== null ? JSON.parse(json) : {date: new Date(year, month, day)};
     return App.DayModel.create(data);
 }
 
-function setHeaderDate(date){
-    console.log(date)
+function gotoDay(date){
+    window.location.hash = "/day/" + date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate();
 }
+
+function updateHeader(date){
+    console.log("updating header with", date)
+    var html = $("#header-template").html();
+    $("#header").html(html);
+    $("#header").find("h1").text(new Date(date).toString());
+    $("#header .prev").click(function(){
+        var newDate = new Date(date);
+        newDate.setDate(newDate.getDate() + 1)
+        gotoDay(newDate)
+    })
+    $("#header .next").click(function(){
+        var newDate = new Date(date);
+        newDate.setDate(newDate.getDate() + 1)
+        gotoDay(newDate)
+    });
+}
+
+

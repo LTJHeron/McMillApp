@@ -9,9 +9,17 @@
 <body>
 
   <script type="text/x-handlebars">
-    header
+    <div id="header">
+      
+    </div>
 
     {{outlet}}
+  </script>
+
+  <script type="text/template" id="header-template">
+    <div class="prev">prev</div>
+    <h1></h1>
+    <div class="next">next</div>
   </script>
 
   <script type="text/x-handlebars" data-template-name="day">
