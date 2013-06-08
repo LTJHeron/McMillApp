@@ -56,14 +56,18 @@ App.DayModel = Ember.Object.extend({
     fatigue: "",
     activities: [],
     concerns: "",
-    appointments: [],
-    treatments: []
+    appointments: []
 });
 
 function getDayModel(year, month, day){
     console.log("getDayModel", year, month, day)
     var json = localStorage.getItem(new Date(year, month, day).toISOString().split("T")[0]);
     var data = json !== null ? JSON.parse(json) : {date: new Date(year, month, day)};
+
+    data.appointments = data.appointments || [];
+    for (var i=0;i<data.appointments.length;i++){
+        data.appointments[i].id=i;
+    }
     return App.DayModel.create(data);
 }
 

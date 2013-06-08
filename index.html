@@ -32,6 +32,12 @@
       </div>
       <div class="card">
         <h2>Appointments</h2>
+        {{#each appointment in model.appointments}}
+          Name: {{appointment.name}}<br>
+          Date: {{appointment.date}}<br>
+          Details: {{appointment.details}}<hr>
+          Notes: {{appointment.notes}}
+        {{/each}}
       </div>
       <a {{ action save }}>save</a>
   </script>
