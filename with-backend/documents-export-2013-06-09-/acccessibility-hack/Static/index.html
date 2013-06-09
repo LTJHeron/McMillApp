@@ -34,6 +34,13 @@
         <br>
         Fatigue:
         <div data-model-name="fatigue" {{ bindAttr data-score="model.fatigue" }} class="star-rating-editable"></div>
+<br>
+        Food:
+        {{#view Ember.TextArea valueBinding="model.food"}}{{/view}}
+        <br>
+        Concerns:
+        {{#view Ember.TextArea valueBinding="model.concerns"}}{{/view}}
+        <br>
         <a class="save" {{ action save }}>Save</a>
 
       </div>
