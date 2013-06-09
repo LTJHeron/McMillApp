@@ -26,7 +26,7 @@ App.DayController = Ember.Controller.extend({
     save: function(){
         var model = this.get("model");
         var json = JSON.stringify(model);
-        localStorage.setItem(model.get("date").toISOString().split("T")[0], json)
+        localStorage.setItem(new Date(model.get("date")).toISOString().split("T")[0], json)
     }
 });
 

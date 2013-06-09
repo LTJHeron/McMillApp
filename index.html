@@ -24,11 +24,13 @@
 
   <script type="text/x-handlebars" data-template-name="day">
     
-      
+      <div class="container">
       <div class="card">
         <h2>Diary</h2>
         <div data-model-name="moodRating" {{ bindAttr data-score="model.moodRating" }} class="star-rating-editable"></div>
         {{#view Ember.TextArea valueBinding="model.moodDescription"}}{{/view}}
+              <a class="save" {{ action save }}>Save</a>
+
       </div>
       <div class="card">
         <h2>Appointments</h2>
@@ -39,8 +41,12 @@
           Notes: {{appointment.notes}}
         {{/each}}
       </div>
-      <a {{ action save }}>save</a>
+      </div>
+      <div class="calLink">
+        Calendar
+      </div>
   </script>
+      
 
   <script src="js/libs/jquery-1.9.1.js"></script>
   <script src="js/libs/handlebars-1.0.0-rc.4.js"></script>

@@ -61,16 +61,54 @@ div.prev:hover, div.prev:active, div.prev:focus{
   border-right: 1em solid rgba(255, 255, 255, 1);
 }
 
-.card {
+.container{
+    position: relative;
+    padding-bottom: 80%;
+    height: 0;
+}
 
+.card {
+    position: relative;
     padding: 10px;
     border-radius: 10px;
     background: #76B56A;
-    border: 1px solid #ccc;
     margin: 10px;
+    left: 0px;
+    right: 0px;
 }
+
 .card h2{
     margin: 0;
     text-transform: uppercase;
     font-size: 12px;
+}
+
+.save{
+    width: 5em;
+    margin: 0 auto;
+    border-radius: 10px;
+    background: #8CC63F;
+    box-shadow:inset  -2px -3px 3px rgba(0, 0, 0, 0.5);
+    padding: .4em;
+    cursor: pointer;
+}
+
+.save:active{
+    box-shadow: -1px -1px 2px rgba(0, 0, 0, 0.5);
+
+}
+
+.calLink{
+    padding: 10px;
+    border-radius: 10px;
+    background: #76B56A;
+    margin: 10px;
+    text-align: center;
+    font-size: 1.5em;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    top: auto;
+    height: auto;
 }
