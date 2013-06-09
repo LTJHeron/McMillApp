@@ -41,6 +41,7 @@
         {{/each}}
       </div>
       <a {{ action save }}>save</a>
+      <a {{ action gotoAppointmentsView}}>view appointmentss</a>
   </script>
 
   <script type="text/x-handlebars" data-template-name="appointments">
@@ -59,7 +60,7 @@
           <a {{action addAppointment}}>Add appointment</a>
         </div>
         <a {{ action save }}>save</a>
-    
+        <a {{ action gotoDayView }}>View day</a>
   </script>
 
   <script src="js/libs/jquery-1.9.1.js"></script>

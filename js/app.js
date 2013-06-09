@@ -34,8 +34,18 @@ App.AppointmentsController = Ember.Controller.extend({
         addAppointment(this, {date: new Date()})
         
         window.location.reload();
+    },
+    gotoDayView: function(){
+        switchView("day")
+    },
+    save: function(){
+        saveModel(this.get("model"))
     }
 });
+
+function switchView(viewName){
+    window.location.hash="/" + viewName + "/" + document.location.hash.split("/").splice(2).join("/")
+}
 
 function addAppointment(controller, data){
         var obj = JSON.parse(JSON.stringify(controller.get("model")));
@@ -56,6 +66,9 @@ App.DayController = Ember.Controller.extend({
     save: function(){
         var model = this.get("model");
         saveModel(model);
+    },
+    gotoAppointmentsView: function(){
+        switchView("appointments")
     }
 });
 
