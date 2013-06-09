@@ -112,7 +112,7 @@ App.DayModel = Ember.Object.extend({
     moodDescription: "",
     food: "",
     health: "",
-    fatigue: "",
+    fatigue: 0,
     concerns: "",
     appointments: []
 });

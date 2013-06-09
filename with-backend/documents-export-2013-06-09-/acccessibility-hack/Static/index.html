@@ -28,9 +28,13 @@
             
       <div role="main"  class="card">
         <h2>Diary</h2>
+        Mood:
         <div data-model-name="moodRating" {{ bindAttr data-score="model.moodRating" }} class="star-rating-editable"></div>
         {{#view Ember.TextArea valueBinding="model.moodDescription"}}{{/view}}
-              <a class="save" {{ action save }}>Save</a>
+        <br>
+        Fatigue:
+        <div data-model-name="fatigue" {{ bindAttr data-score="model.fatigue" }} class="star-rating-editable"></div>
+        <a class="save" {{ action save }}>Save</a>
 
       </div>
       <div role="form" class="card">
