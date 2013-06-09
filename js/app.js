@@ -121,7 +121,9 @@ function updateHeader(date){
     console.log("updating header with", date)
     var html = $("#header-template").html();
     $("#header").html(html);
-    $("#header").find("h1").text(new Date(date).toString());
+    date = new Date(date);
+    var dateString = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][date.getMonth()] + " " + date.getDate() + " " + date.getFullYear()
+    $("#header").find("h1").text(dateString);
     $("#header .prev").click(function(){
         var newDate = new Date(date);
         newDate.setDate(newDate.getDate() - 1)
