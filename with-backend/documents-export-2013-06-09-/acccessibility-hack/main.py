@@ -95,7 +95,7 @@ class ViewCalendarEntry(webapp.RequestHandler):
         query_result = {}
         index =0
         for q in day.run():
-            json_out = json.JSONEncoder().encode([dict(fatigue=q.fatigue, mood = q.mood, moodDescription=q.mood_detail, date=q.date, food=q.food, health=q.health, concerns=q.concerns])
+            json_out = json.JSONEncoder().encode([dict(fatigue=q.fatigue, mood=q.mood, moodDescription=q.mood_detail, date=q.date, food=q.food, health=q.symptoms, concerns=q.concerns)])
             #self.response.out.write(json_out)
             query_result[index] = json_out
             index = index+1
