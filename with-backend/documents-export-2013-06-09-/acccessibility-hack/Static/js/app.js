@@ -79,6 +79,7 @@ function saveModel(model){
     data.date = getUrlDate(date.getFullYear(), date.getMonth(), date.getDate());
     console.log(data)
     data.mood = data.moodRating;
+    data.mood_detail = data.moodDescription;
     console.log(data)
     $.ajax({
         url: window.apiRoot + "editDay",
