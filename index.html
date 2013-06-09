@@ -9,7 +9,7 @@
 <body>
 
   <script type="text/x-handlebars">
-    <div id="header">
+    <div role="navigation" id="header">
       
     </div>
 
@@ -17,34 +17,58 @@
   </script>
 
   <script type="text/template" id="header-template">
-    <div class="prev">prev</div>
+    <div role="button" class="prev">prev</div>
     <h1></h1>
-    <div class="next">next</div>
+    <div role="button" class="next">next</div>
   </script>
 
   <script type="text/x-handlebars" data-template-name="day">
     
-      <div class="container">
-      <div class="card">
+    <div class="container">
+            
+      <div role="main"  class="card">
         <h2>Diary</h2>
         <div data-model-name="moodRating" {{ bindAttr data-score="model.moodRating" }} class="star-rating-editable"></div>
         {{#view Ember.TextArea valueBinding="model.moodDescription"}}{{/view}}
               <a class="save" {{ action save }}>Save</a>
 
       </div>
-      <div class="card">
+      <div role="form" class="card">
         <h2>Appointments</h2>
         {{#each appointment in model.appointments}}
           Name: {{appointment.name}}<br>
           Date: {{appointment.date}}<br>
-          Details: {{appointment.details}}<hr>
+          Details: {{appointment.details}}
           Notes: {{appointment.notes}}
+          <hr>
         {{/each}}
       </div>
+
       </div>
       <div class="calLink">
         Calendar
       </div>
+      <a role="button" {{ action save }}>save</a>
+      <a {{ action gotoAppointmentsView}}>view appointmentss</a>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="appointments">
+         
+        {{#each appointment in model.appointments}}
+          <div class="card appointment">
+             Name: {{view Ember.TextArea valueBinding="appointment.name"}}
+          <br>
+          Details: {{view Ember.TextArea valueBinding="appointment.details"}}
+          <br>
+          Notes: {{view Ember.TextArea valueBinding="appointment.notes"}}
+          </div>
+        {{/each}}
+        <div class="card">
+
+          <a {{action addAppointment}}>Add appointment</a>
+        </div>
+        <a role="button" {{ action save }}>save</a>
+        <a {{ action gotoDayView }}>View day</a>
   </script>
       
 
