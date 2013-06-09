@@ -47,16 +47,18 @@
          
         {{#each appointment in model.appointments}}
           <div class="card appointment">
-            Name: {{appointment.name}}<br>
-            Date: {{appointment.date}}<br>
-            Details: {{appointment.details}}
-            Notes: {{appointment.notes}}
+             Name: {{view Ember.TextArea valueBinding="appointment.name"}}
+          <br>
+          Details: {{view Ember.TextArea valueBinding="appointment.details"}}
+          <br>
+          Notes: {{view Ember.TextArea valueBinding="appointment.notes"}}
           </div>
         {{/each}}
         <div class="card">
 
           <a {{action addAppointment}}>Add appointment</a>
         </div>
+        <a {{ action save }}>save</a>
     
   </script>
 
