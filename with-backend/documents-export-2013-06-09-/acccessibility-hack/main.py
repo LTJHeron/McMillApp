@@ -71,10 +71,10 @@ class MakeCalendarEntry(webapp.RequestHandler):
         #cal_date = dates.pop(0)
         data = CalendarEntry(data=self.request.POST)
         if data.is_valid():
-            entity =data.save(commit=False)
+            entity =data.save(commit=True)
             #parts = cal_date.split('/')
             #entity.date = cal_date #date(parts[2],parts[1], parts[0])
-            entity.put()
+            #entity.put()
             
         else:
             print "Error:"
