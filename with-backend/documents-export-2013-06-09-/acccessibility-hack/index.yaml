@@ -9,3 +9,25 @@ indexes:
 # manually, move them above the marker line.  The index.yaml file is
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
+
+- kind: Day
+  properties:
+  - name: date
+  - name: updatedate
+
+- kind: Day
+  properties:
+  - name: date
+  - name: updatedate
+    direction: desc
+
+- kind: Day
+  properties:
+  - name: date
+  - name: updatedatetime
+
+- kind: Day
+  properties:
+  - name: date
+  - name: updatedatetime
+    direction: desc

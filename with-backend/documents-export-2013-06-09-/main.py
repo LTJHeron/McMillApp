@@ -86,7 +86,7 @@ class ViewCalendarEntry(webapp.RequestHandler):
         dates = urlparse.parse_qs(o.query)['day']
         cal_date = dates.pop(0)
         #for key, value in date.iteritems():
-        self.response.out.write("cal: " + cal_date)
+        #self.response.out.write("cal: " + cal_date)
         #date = self.request.get('da.y')
         #day = Day.all()
         #q = day.get()

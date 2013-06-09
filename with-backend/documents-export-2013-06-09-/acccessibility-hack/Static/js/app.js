@@ -150,8 +150,8 @@ function getDayModel(year, month, day){
                   },
          async:   false
     });          
-    ajaxRet = ajaxRet || "[{}]"
-    
+    ajaxRet = (ajaxRet !== "None") ? ajaxRet : "[{}]"
+
     var data = JSON.parse(ajaxRet)[0]
     data.moodRating = data.mood;
 data.date = new Date(year,month, day)

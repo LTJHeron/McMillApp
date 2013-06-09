@@ -48,6 +48,7 @@ class Day(db.Model):
     symptoms = db.StringProperty()
     concerns = db.StringProperty()
     activity = db.ReferenceProperty(Activity)
+    updatedatetime= db.DateTimeProperty(auto_now=True)
 class CalendarEntry(djangoforms.ModelForm):
     class Meta:
         model = Day
@@ -69,12 +70,14 @@ class MakeCalendarEntry(webapp.RequestHandler):
         o=urlparse.urlparse(url)
         #dates = urlparse.parse_qs(o.query)['day']
         #cal_date = dates.pop(0)
+
+
         data = CalendarEntry(data=self.request.POST)
         if data.is_valid():
-            entity =data.save(commit=False)
+            entity =data.save(commit=True)
             #parts = cal_date.split('/')
             #entity.date = cal_date #date(parts[2],parts[1], parts[0])
-            entity.put()
+            #entity.put()
             
         else:
             print "Error:"
@@ -86,20 +89,23 @@ class ViewCalendarEntry(webapp.RequestHandler):
         dates = urlparse.parse_qs(o.query)['day']
         cal_date = dates.pop(0)
         #for key, value in date.iteritems():
-        self.response.out.write("cal: " + cal_date)
+        #self.response.out.write("cal: " + cal_date)
         #date = self.request.get('da.y')
         #day = Day.all()
         #q = day.get()
         #self.response.out.write(q.date)
-        day = db.GqlQuery("SELECT * FROM Day WHERE date = :1", cal_date)
+        day = db.GqlQuery("SELECT * FROM Day WHERE date = :1 ORDER BY updatedatetime asc", cal_date)
         query_result = {}
         index =0
+        json_out = None
         for q in day.run():
-            json_out = json.JSONEncoder().encode([dict(fatigue=q.fatigue, mood=q.mood, moodDescription=q.mood_detail, date=q.date, food=q.food, health=q.symptoms, concerns=q.concerns)])
+            if  index == 0 or True:
+                json_out = json.JSONEncoder().encode([dict(updated=str(q.updatedatetime),fatigue=q.fatigue, mood=q.mood, moodDescription=q.mood_detail, date=q.date, food=q.food, health=q.symptoms, concerns=q.concerns)])
             #self.response.out.write(json_out)
             query_result[index] = json_out
             index = index+1
-        self.response.out.write(query_result)
+        #self.response.out.write(query_result)
+        self.response.out.write(json_out)
         #return self.redirect('view.html?%s'% urllib.urlencode(query_result))
         
 class MainPage(webapp.RequestHandler):
