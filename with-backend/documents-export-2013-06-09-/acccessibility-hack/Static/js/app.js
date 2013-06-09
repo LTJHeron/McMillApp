@@ -75,6 +75,8 @@ App.DayController = Ember.Controller.extend({
 
 function saveModel(model){
     var data = JSON.parse(JSON.stringify(model));
+    var date = model.get("date")
+    data.date = getUrlDate(date.getFullYear(), date.getMonth(), date.getDate());
     console.log(data)
     data.mood = data.moodRating;
     console.log(data)
@@ -123,8 +125,7 @@ App.AppointmentModel =  Ember.Object.extend({
 
 window.apiRoot = "http://localhost:10098/"
 
-
-function getDayModel(year, month, day){
+function getUrlDate(year, month, day){
     var dayString = "" + day;
     if (day < 10){
         dayString = "0" + dayString;
@@ -133,19 +134,27 @@ function getDayModel(year, month, day){
     if (month < 10){
         monthString = "0" + monthString;
     }
+
+    return dayString + "/" + monthString + "/" + year;
+}
+
+
+function getDayModel(year, month, day){
+
     var ajaxRet = null;
     $.ajax({
 
-         url:    window.apiRoot + "viewDay?day=" + dayString + "/" + monthString + "/" + year,
+         url:    window.apiRoot + "viewDay?day=" + getUrlDate(year, month, day),
          success: function(result) {
                       ajaxRet = result;
                   },
          async:   false
     });          
-
+    ajaxRet = ajaxRet || "[{}]"
+    
     var data = JSON.parse(ajaxRet)[0]
     data.moodRating = data.mood;
-
+data.date = new Date(year,month, day)
     return App.DayModel.create(data);
 
 
