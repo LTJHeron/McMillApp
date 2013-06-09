@@ -1,3 +1,12 @@
+$('body').on("click","div.card",function(){
+  $(this).toggleClass('big');
+});
+$('body').on("click", "div.card:nth-of-type(even)", function(){
+  $("div.card:nth-of-type(odd)").toggleClass('min');
+});
+//end jquery toggle
+
+
 $.fn.raty.defaults.path = "js/libs/raty/img";
 
 App = Ember.Application.create();
